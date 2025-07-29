@@ -1,4 +1,4 @@
-export const config: {
+export interface Config {
     appID: string;
     publicKey: string;
     clientID: string;
