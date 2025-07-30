@@ -4,7 +4,7 @@ import fs from "fs";
 import { registerEventType, 
         eventFolderType, 
         importPromisesType } 
-from "./eventHandler.types";
+from "./types/eventHandler.types";
 
 const registerEvents: registerEventType = async (client) => {
     const __filename = fileURLToPath(import.meta.url); 

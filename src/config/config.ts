@@ -1,6 +1,6 @@
 /* global process */
 import dotenv from 'dotenv';
-import { Config } from './config.types';
+import { Config } from './types/config.types';
 
 dotenv.config({ path: ["./envs/.env.dev"] });
 

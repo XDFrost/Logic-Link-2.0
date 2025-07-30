@@ -2,18 +2,18 @@ import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 import { REST, Routes, SlashCommandBuilder } from "discord.js";
-import { onLoginEvent } from "./ready.types";
-import { config } from "../../config/config.js";
+import { registerCommandsType } from "./types/registerCommands.types";
+import { config } from "../config/config.ts";
 
-const registerCommands: onLoginEvent = async (client) => {
+const registerCommands: registerCommandsType = async () => {  
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     const commands: SlashCommandBuilder[] = [];
     let count = 0;
 
     try {
-        const commandsRoot = path.join(__dirname, "..", "..", "commands");
-
+        const commandsRoot = path.join(__dirname, "..", "commands");
+        
         // Recursively find all command files
         const findCommandFiles = (dir: string): string[] => {
             const files: string[] = [];
@@ -82,4 +82,4 @@ const registerCommands: onLoginEvent = async (client) => {
     }
 };
 
-export default registerCommands;
+registerCommands();

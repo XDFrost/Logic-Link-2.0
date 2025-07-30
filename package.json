@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "npx tsx src/main.ts",
     "start": "npx tsx src/main.ts",
+    "register:commands": "tsx src/handlers/registerCommands.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
