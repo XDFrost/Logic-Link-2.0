@@ -1,3 +1,5 @@
 import CustomClient from "./base/classes/CustomClient";
 
-(new CustomClient()).Init();
+(async () => {
+    await (new CustomClient()).Init();
+})();

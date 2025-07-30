@@ -1,7 +1,9 @@
-import { Client } from "discord.js"
+import { onLoginEvent } from "./ready.types";
 
-export default function onlogin(client: Client) : void {
+const onlogin : onLoginEvent = (client) => {
     client.on("ready", () => {
         console.log(`Logged in as ${client.user?.tag}`);
     })
 }
+
+export default onlogin;

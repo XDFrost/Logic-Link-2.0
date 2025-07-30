@@ -15,7 +15,11 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "allowImportingTsExtensions": true,
-        "noEmit": true
+        "noEmit": true,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/@discordjs/typings"
+        ]
     },
     "include": [ "src/**/*.ts", "src/config/**.ts", "src/config/config.ts", "src/commands/utility/ping.ts"],
     "exclude": ["dist", "node_modules", "tests", "vitest.config.ts"]

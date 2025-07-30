@@ -7,4 +7,4 @@ export const data : PingData = new SlashCommandBuilder()
 
 export const execute : PingExecute = async (interaction) => {
     await interaction.reply("Pong!");
-}
+}  
