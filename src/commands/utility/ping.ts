@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { PingData, PingExecute } from "./types/ping.types.js";
+import type { PingData, PingExecute } from "./types/ping.js";
 
 export const data : PingData = new SlashCommandBuilder()
     .setName("ping")

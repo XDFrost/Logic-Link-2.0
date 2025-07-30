@@ -1,4 +1,4 @@
-import { onLoginEvent } from "./types/ready.types";
+import { onLoginEvent } from "./types/ready";
 
 const onlogin : onLoginEvent = (client) => {
     client.on("ready", () => {

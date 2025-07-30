@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, Collection } from "discord.js";
-import ICustomClient from "../interfaces/ICustomClient.js";
+import ICustomClient from "../interfaces/CustomClient.js";
 import { config } from "../../config/config.js";
 import registerEvents from "../../handlers/eventHandler.js";
 import commandHandler from "../../handlers/commandHandler.js";

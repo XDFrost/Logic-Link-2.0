@@ -2,7 +2,7 @@ import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 import { Interaction } from "discord.js";
-import { commandHandlerType, findCommandFilesType } from "./types/commandHandler.types";
+import { commandHandlerType, findCommandFilesType } from "./types/commandHandler";
 
 const commandHandler : commandHandlerType = async (client) => {
     const __filename = fileURLToPath(import.meta.url);

@@ -2,7 +2,7 @@ import { fileURLToPath, pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 import { REST, Routes, SlashCommandBuilder } from "discord.js";
-import { registerCommandsType } from "./types/registerCommands.types";
+import { registerCommandsType } from "./types/registerCommands";
 import { config } from "../config/config.ts";
 
 const registerCommands: registerCommandsType = async () => {  
