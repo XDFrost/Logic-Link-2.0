@@ -40,9 +40,12 @@ const commandHandler : commandHandlerType = async (client) => {
             const fileUrl = pathToFileURL(commandFile);
             const commandModule = await import(fileUrl.href);
 
-            if (commandModule.data && commandModule.execute) {
-                commands.set(commandModule.data.name, commandModule);
-                console.log(`Loaded command handler: ${commandModule.data.name}`);
+            // Handle both default export and named exports
+            const command = commandModule.default || commandModule;
+            
+            if (command && command.data && command.execute) {
+                commands.set(command.data.name, command);
+                console.log(`Loaded command handler: ${command.data.name}`);
             }
         } catch (error) {
             console.error(`Failed to load command handler from ${commandFile}:`, error);
@@ -53,23 +56,34 @@ const commandHandler : commandHandlerType = async (client) => {
     client.on("interactionCreate", async (interaction: Interaction) => {
         if (!interaction.isChatInputCommand()) return;
 
-        const command = commands.get(interaction.commandName);
+        const commandName = interaction.commandName;
+        const command = commands.get(commandName);
 
         if (!command) {
-            console.error(`No command matching ${interaction.commandName} was found.`);
+            console.error(`No command matching ${commandName} was found.`);
             return;
         }
 
         try {
             await command.execute(interaction);
         } catch (error) {
-            console.error(`Error executing command ${interaction.commandName}:`, error);
+            console.error(`Error executing command ${commandName}:`, error);
+            
+            // Check if the interaction is still valid before trying to respond
+            if (!interaction.isRepliable()) {
+                console.error(`Interaction is no longer repliable for command ${commandName}`);
+                return;
+            }
             
             const errorMessage = "There was an error while executing this command!";
-            if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: errorMessage, ephemeral: true });
-            } else {
-                await interaction.reply({ content: errorMessage, ephemeral: true });
+            try {
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ content: errorMessage, flags: 64 });
+                } else {
+                    await interaction.reply({ content: errorMessage, flags: 64 });
+                }
+            } catch (replyError) {
+                console.error(`Failed to send error message for command ${commandName}:`, replyError);
             }
         }
     });

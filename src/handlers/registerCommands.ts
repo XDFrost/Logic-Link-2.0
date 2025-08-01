@@ -43,10 +43,13 @@ const registerCommands: registerCommandsType = async () => {
                 const fileUrl = pathToFileURL(commandFile);
                 const commandModule = await import(fileUrl.href);
 
-                if (commandModule.data && commandModule.data instanceof SlashCommandBuilder) {
-                    commands.push(commandModule.data);
+                // Handle both default export and named exports
+                const command = commandModule.default || commandModule;
+
+                if (command && command.data && command.data instanceof SlashCommandBuilder) {
+                    commands.push(command.data);
                     count++;
-                    console.log(`Loaded command: ${commandModule.data.name} from ${commandFile}`);
+                    console.log(`Loaded command: ${command.data.name} from ${commandFile}`);
                 } else {
                     console.warn(`Command file ${commandFile} does not export a valid SlashCommandBuilder as 'data'`);
                 }
@@ -82,4 +85,4 @@ const registerCommands: registerCommandsType = async () => {
     }
 };
 
-registerCommands();
+export default registerCommands;

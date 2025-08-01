@@ -1,4 +1,5 @@
 import { Client, GatewayIntentBits, Collection } from "discord.js";
+import ICommand from "../../commands/types/CommandClient.js";
 import ICustomClient from "../interfaces/CustomClient.js";
 import { config } from "../../config/config.js";
 import registerEvents from "../../handlers/eventHandler.js";
@@ -6,7 +7,7 @@ import commandHandler from "../../handlers/commandHandler.js";
 
 export default class CustomClient extends Client implements ICustomClient {
     config: typeof config;
-    commands: Collection<string, any>;
+    commands: Collection<string, ICommand>;
 
     constructor() {
         super({
